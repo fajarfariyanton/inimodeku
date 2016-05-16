@@ -98,7 +98,8 @@ require('writehtmlclass.php');
 
 
 
-function IS_CURL($keyword){      
+function IS_CURL($keyword){   
+	$protokol= protokol();
     $data = curl_init();
 	$header[0] = "Accept: text/xml,application/xml,application/xhtml+xml,";
 	$header[0] .= "text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5";
@@ -139,7 +140,7 @@ $ass= trim($ass, ' ');
 $ass= strtolower($ass);
 $desdes= $clean_titleku= $item->description->__toString();
 $slugku= str_replace(' ', '-', $ass).'.pdf';
-$isiku= '<a href="http://'.$_SERVER['SERVER_NAME'].'/'.$slugku.'">'.$ass.'</a><br>'.$desdes.'<hr>';
+$isiku= '<a href="'.$protokol.$_SERVER['SERVER_NAME'].'/'.$slugku.'">'.$ass.'</a><br>'.$desdes.'<hr>';
 $has_arr[]= $isiku;
 }
 }
@@ -178,5 +179,19 @@ function is_bot(){
 	}
 $patern= 'bot|google|media|yandex|bing|yahoo|msn|image|preview|partner|bingpreview|bingbot|msnbot';
 return preg_match('/('.$patern.')/i', $_SERVER['HTTP_USER_AGENT']);
+}
+
+function protokol(){
+	if (isset($_SERVER['HTTPS']) &&
+    ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+    isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+    $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+  $protokol = 'https://';
+}
+else {
+  $protokol = 'http://';
+}
+return $protokol;
+}
 }
 ?>
