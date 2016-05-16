@@ -1,0 +1,18 @@
+RewriteRule ^home$ home.php [L]
+RewriteRule ^this/page/(\d+)$ home.php?page=$1 [L]
+RewriteRule ^google([a-zA-Z0-9]+).html$ webmaster-verification.php?key=google$1.html [L]
+
+RewriteRule ^([a-zA-Z0-9-]+)\.pdf$ pdf-generator.php?title=$1 [L]
+
+RewriteRule ^robots.txt$ robots.php [L]
+RewriteRule ^sitemap-index.xml$ xml-sitemap-index.php [L]
+RewriteRule ^file-sitemap/(.*).xml$ xml-sitemap.php?file=$1.txt [L]
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
