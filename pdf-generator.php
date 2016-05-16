@@ -193,5 +193,5 @@ else {
 }
 return $protokol;
 }
-}
+
 ?>
