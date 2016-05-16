@@ -33,6 +33,16 @@ exit();
 $posisi_file= $all_file[$nomor_file];
 
 $array= array_filter(explode("\n", file_get_contents($posisi_file)));
+
+if (isset($_SERVER['HTTPS']) &&
+    ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+    isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+    $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+  $protokol = 'https://';
+}
+else {
+  $protokol = 'http://';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,9 +50,9 @@ $array= array_filter(explode("\n", file_get_contents($posisi_file)));
   <title><?php echo $_SERVER['SERVER_NAME'].$page_title;?></title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <meta name="description" content="Download free manual of all ebook - <?php echo $_SERVER['SERVER_NAME'].$page_title;?> get your ebook without pay"/>
 
 <?php
@@ -50,13 +60,13 @@ $nextpage= $pagi+1;
 $prevpage= $pagi-1;
 if($pagi > 2){
 echo '
-<link rel="prev" href="http://'.$_SERVER['SERVER_NAME'].'/this/page/'.$prevpage.'">
+<link rel="prev" href="'.$protokol.$_SERVER['SERVER_NAME'].'/this/page/'.$prevpage.'">
 ';
 }
 
 if($pagi < $max_page){
 echo '
-<link rel="next" href="http://'.$_SERVER['SERVER_NAME'].'/this/page/'.$nextpage.'">
+<link rel="next" href="'.$protokol.$_SERVER['SERVER_NAME'].'/this/page/'.$nextpage.'">
 ';
 }
 ?>
