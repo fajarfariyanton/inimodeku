@@ -1,0 +1,2 @@
+# inimodeku
+go main main
