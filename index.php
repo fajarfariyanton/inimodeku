@@ -10,6 +10,7 @@ if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])){
 
 $all_file= glob("split/*.txt");
 
+shuffle($all_file);
 
 if(!isset($_GET['page']) || empty($_GET['page'])){
 $pagi= 1;
