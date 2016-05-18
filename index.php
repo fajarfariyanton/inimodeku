@@ -24,15 +24,19 @@ $nomor_file= $pagi-1;
 
 $total_row= count($all_file)+1;
 
-$max_page= $total_row;
+$max_page= 4000;
 
 if($pagi > $max_page){
 header('location: /');
 exit();
 }
-
+	if(isset($all_file[$nomor_file])){
 $posisi_file= $all_file[$nomor_file];
-
+	}else{
+$nomor_file= rand(0,$total_row);
+$posisi_file= $all_file[$nomor_file];
+	}
+	
 $array= array_filter(explode("\n", file_get_contents($posisi_file)));
 
 if (isset($_SERVER['HTTPS']) &&
