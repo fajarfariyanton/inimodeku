@@ -130,6 +130,10 @@ function IS_CURL($keyword){
 		 return null;
 	 }
 
+	if(!isset($hasil->channel->item)){
+		return null;
+	}
+
 $has_arr= array();	 
 foreach($hasil->channel->item as $item){
 $clean_titleku= $item->title->__toString();
